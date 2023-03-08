@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
+const geoCode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 const app = express();
 
@@ -40,12 +42,27 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    res.send({
-        title: 'Weather',
-        forecast: '29 deg celcius',
-        location: 'allahabad',
-        name: 'Mohd Mahin Ansari'
-    })
+    const { address } = req.query || {};
+
+    if (!address) {
+        return res.send({
+            error: 'Search query is required'
+        });
+    }
+
+    geoCode(address, (err, response) => {
+        if (err) {
+            return res.send({error: err});
+        }
+
+        const { latitude, longitude } = response || {};
+        forecast(latitude, longitude, (err, response) => {
+            if (err) {
+                return res.send({error: err});
+            }
+            res.send(response);
+        });
+    });
 });
 
 app.get('/help/*', (req, res) => {

@@ -22,9 +22,9 @@ header {
     margin-bottom: 48px;
 }
 
-img {
+/* img {
     width: 250px;
-}
+} */
 
 header a {
     text-decoration: none;
@@ -39,4 +39,21 @@ h1 {
 
 .main {
     flex-grow: 1;
+}
+
+input {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+input:focus {
+    outline: 1px solid #ccc;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid #888;
+    background-color: #888;
+    color: white;
+    padding: 8px;
 }

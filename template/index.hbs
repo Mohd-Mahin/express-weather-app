@@ -5,11 +5,18 @@
     <title>Weather</title>
     <link rel="icon" href="/assets/weather.png" >
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/utils.js"></script>
+    <script src="/js/utils.js" defer></script>
 </head>
 <body>
     <div class="main">
         {{>header}}
+        <form>
+            <input placeholder="Location" />
+            <button type="submit">Search</button>
+        </form>
+        <p id="message-one"></p>
+        <p id="message-two"></p>
+        <img id="weather-image" />
     </div>
     {{>footer}}
 </body>
